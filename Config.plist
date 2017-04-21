@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>listViewMode</key>
+	<true/>
+	<key>yelp_client_id</key>
+	<string>XWiMVjMxo1FdTa5sNIKEBw</string>
+	<key>yelp_client_secret</key>
+	<string>NVTuA0kqDvPDs24dXBFYfaOGCzPzvRjWNvMUx3Xziw5o1bGIjiM0LSwJ8nWViols</string>
+</dict>
+</plist>
