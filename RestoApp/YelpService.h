@@ -31,6 +31,6 @@
 
 - (void)downloadImageFromUrl:(NSURL*)imageUrl forCell:(RestaurantCell*)cell;
 
-- (void)downloadUserAvatarFromUrl:(NSURL*)imageUrl forCell:(ReviewCell*)cell;
+- (void)downloadUserAvatarFromUrl:(YLPReview*)review forCell:(ReviewCell*)cell;
 
 @end

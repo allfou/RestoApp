@@ -44,7 +44,7 @@
         
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
             [self.locationManager requestWhenInUseAuthorization];
-            [self.locationManager requestAlwaysAuthorization];
+            //[self.locationManager requestAlwaysAuthorization];
         }
     }
     

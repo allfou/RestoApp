@@ -70,7 +70,9 @@
              [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshReviewsMessageEvent" object:reviews];
              
              // Update cache
-             [self.cache setObject:reviews forKey:businessId];
+             if (reviews) {
+                 [self.cache setObject:reviews forKey:businessId];
+             }
          }];
     }
 }
@@ -104,8 +106,8 @@
                                    } failure:nil];
 }
 
-- (void)downloadUserAvatarFromUrl:(NSURL*)imageUrl forCell:(ReviewCell*)cell {
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageUrl];
+- (void)downloadUserAvatarFromUrl:(YLPReview*)review forCell:(ReviewCell*)cell {
+    NSURLRequest *request = [NSURLRequest requestWithURL:review.user.imageURL];
     UIImage *placeholderImage = [UIImage imageNamed:@"your_placeholder"];
 
     [cell.userImage setImageWithURLRequest:request

@@ -1,20 +1,22 @@
 //
-//  DetailViewController.m
+//  RestaurantDetailViewController.m
 //  RestoApp
 //
 //  Created by Fouad Allaoui on 4/19/17.
 //  Copyright © 2017 Fouad Allaoui. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "RestaurantDetailViewController.h"
+#import "ReviewDetailViewController.h"
 #import "LocationService.h"
 #import "YelpService.h"
 #import "AppDelegate.h"
 #import "ReviewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "Theme.h"
+#import "Review.h"
 
-@interface DetailViewController ()
+@interface RestaurantDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -26,11 +28,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *openOrClose;
 @property (weak, nonatomic) IBOutlet UIView *backgroundImage;
 
-@property NSArray<YLPReview *> *reviews;
+@property NSArray *reviews;
 
 @end
 
-@implementation DetailViewController
+@implementation RestaurantDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,8 +64,7 @@
     } else {
         [self.openOrClose setText:@"Open"];
         [self.openOrClose setTintColor:[UIColor greenColor]];
-    }
-    //self.distance = self.restaurant.business.location
+    }    
     self.rating.allowsHalfStars = YES;
     self.rating.accurateHalfStars = YES;
     self.rating.value = self.restaurant.business.rating;
@@ -72,7 +73,6 @@
     [self.rating setUserInteractionEnabled:NO];
     
     // Init Data
-    self.reviews = [NSArray<YLPReview *> new];
     [self initData];
 }
 
@@ -136,7 +136,7 @@
 
 // **************************************************************************************************
 
-#pragma mark UITableViewDataSource
+#pragma mark TableView DataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -157,13 +157,37 @@
     
     // Set User Avatar
     __weak ReviewCell *weakCell = cell;
-    [[YelpService sharedManager]downloadUserAvatarFromUrl:[self.reviews[indexPath.row] user].imageURL forCell:weakCell];
+    [[YelpService sharedManager]downloadUserAvatarFromUrl:self.reviews[indexPath.row] forCell:weakCell];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 115.0f;
+}
+
+// **************************************************************************************************
+
+#pragma mark TableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"reviewSegue" sender:self];
+}
+
+// **************************************************************************************************
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.destinationViewController isKindOfClass:[ReviewDetailViewController class]]) {
+        // Get selected cell row index to get the selected review
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        ReviewDetailViewController *vc = segue.destinationViewController;
+        Review *review = [Review new];
+        review.review = self.reviews[indexPath.row];
+        vc.review = review;
+    }
 }
 
 @end

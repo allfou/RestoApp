@@ -7,7 +7,7 @@
 //
 
 #import "RestaurantCollectionViewController.h"
-#import "DetailViewController.h"
+#import "RestaurantDetailViewController.h"
 #import "RestaurantCell.h"
 #import "LocationService.h"
 #import "YelpService.h"
@@ -125,7 +125,9 @@ static NSString * const detailCellID = @"detailCell";
     return cell;
 }
 
-#pragma mark UICollectionViewDelegate
+// ************************************************************************************************************
+
+#pragma mark CollectionView Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"detailSegue" sender:self];
@@ -224,11 +226,11 @@ static NSString * const detailCellID = @"detailCell";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[RestaurantDetailViewController class]]) {
         // Get selected cell row index to get the selected restaurant ID
         NSArray *myIndexPaths = [self.collectionView indexPathsForSelectedItems];
         NSIndexPath *indexPath = [myIndexPaths objectAtIndex:0];
-        DetailViewController *vc = segue.destinationViewController;
+        RestaurantDetailViewController *vc = segue.destinationViewController;
         vc.restaurant = self.restaurants[indexPath.row];
     }
 }

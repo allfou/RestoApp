@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  RestaurantDetailViewController.h
 //  RestoApp
 //
 //  Created by Fouad Allaoui on 4/19/17.
@@ -11,7 +11,7 @@
 #import "HCSStarRatingView.h"
 #import "Restaurant.h"
 
-@interface DetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
+@interface RestaurantDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
 
 @property Restaurant *restaurant;
 
