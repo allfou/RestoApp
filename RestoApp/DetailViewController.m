@@ -7,8 +7,9 @@
 //
 
 #import "DetailViewController.h"
-//#import "LocationService.h"
+#import "LocationService.h"
 #import "YelpService.h"
+#import "YLPCoordinate.h"
 #import "YLPReview.h"
 #import "YLPBusiness.h"
 #import "YLPBusinessReviews.h"
@@ -21,8 +22,15 @@
 
 @interface DetailViewController ()
 
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet HCSStarRatingView *rating;
+@property (weak, nonatomic) IBOutlet UILabel *hours;
+@property (weak, nonatomic) IBOutlet UILabel *totalReviews;
+@property (weak, nonatomic) IBOutlet UILabel *openOrClose;
+
 @property NSArray<YLPReview *> *reviews;
 
 @end
@@ -45,6 +53,11 @@
     // Init Data
     self.reviews = [NSArray<YLPReview *> new];
     
+    // Init Map View
+    self.mapView.showsUserLocation = YES;
+    //self.mapView.delegate = self;
+    self.mapView.mapType = MKMapTypeStandard;
+    
     // Init Restaurant details
     [self.name setText:self.restaurant.business.name];
     [self.totalReviews setText:[NSString stringWithFormat:@"%lu Reviews", (unsigned long)[self.restaurant.business reviewCount]]];
@@ -63,15 +76,10 @@
     [self.rating setUserInteractionEnabled:NO];
     
     // Init Restaurant Reviews
-    [[AppDelegate sharedYelpClient] reviewsForBusinessWithId:self.restaurant.business.identifier completionHandler:^
-    (YLPBusinessReviews *reviews, NSError *error) {
-      NSLog(@"%@", reviews);
-        self.reviews = reviews.reviews;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+    [self getRestaurantReviews];
+    
+    // Init Restaurant Location
+    [self getRestaurantLocation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,7 +87,40 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma UITableViewDataSource
+// **************************************************************************************************
+
+#pragma mark Data
+
+- (void)getRestaurantReviews {
+    [[AppDelegate sharedYelpClient] reviewsForBusinessWithId:self.restaurant.business.identifier completionHandler:^
+     (YLPBusinessReviews *reviews, NSError *error) {
+         NSLog(@"%@", reviews);
+         self.reviews = reviews.reviews;
+         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [self.tableView reloadData];
+         });
+     }];
+}
+
+- (void)getRestaurantLocation {
+     MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc]init];
+     CLLocationCoordinate2D pinCoordinate;
+     pinCoordinate.latitude = self.restaurant.business.location.coordinate.latitude;
+     pinCoordinate.longitude = self.restaurant.business.location.coordinate.longitude;
+     myAnnotation.coordinate = pinCoordinate;
+     myAnnotation.title = self.restaurant.business.name;
+     
+     dispatch_async(dispatch_get_main_queue(), ^{
+         MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:pinCoordinate fromEyeCoordinate:CLLocationCoordinate2DMake(pinCoordinate.latitude, pinCoordinate.longitude) eyeAltitude:10000];
+         [self.mapView setCamera:camera];
+         [self.mapView addAnnotation:myAnnotation];
+     });
+}
+
+// **************************************************************************************************
+
+#pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -99,6 +140,10 @@
     [cell updateCellWithReview:self.reviews[indexPath.row]];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 115.0f;
 }
 
 @end

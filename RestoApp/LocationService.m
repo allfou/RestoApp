@@ -63,9 +63,6 @@
             self.location = [NSString stringWithFormat:@"%@, %@", placemark.locality, placemark.administrativeArea];
             NSLog(@"Current Location Update = %@", self.location);
             
-            // Update List of Restaurant at Location
-            //[[YelpService sharedManager] getNearByRestaurantsForLocation:self.location];
-            
             // Post Updated Current Location Notification to Restaurant View Controller
             [[NSNotificationCenter defaultCenter] postNotificationName:@"currentLocationUpdatedMessageEvent" object:self.location];
         }
