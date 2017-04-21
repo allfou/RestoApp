@@ -39,8 +39,9 @@
 		F548BB1C1EA7E97D009AE09C /* RestaurantCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F548BB1B1EA7E97D009AE09C /* RestaurantCollectionViewController.m */; };
 		F548BB1F1EA7E9A3009AE09C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F548BB1E1EA7E9A3009AE09C /* DetailViewController.m */; };
 		F548BB231EA7EE0E009AE09C /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F548BB221EA7EE0E009AE09C /* MessageViewController.m */; };
-		F548BB251EA7EFF1009AE09C /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = F548BB241EA7EFF1009AE09C /* data.json */; };
 		F59846CA1EA9996900D7ECFA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59846C91EA9996900D7ECFA /* MapKit.framework */; };
+		F5B7E5CE1EA9CA2400E45C0E /* ReviewRestaurantCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */; };
+		F5B7E5D11EA9D4EB00E45C0E /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B7E5D01EA9D4EB00E45C0E /* ReviewCell.m */; };
 		F5D368191EA94D6C0055C9FD /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D368181EA94D6C0055C9FD /* LocationService.m */; };
 		F5F22DDD1EA86BFB00D2430E /* YelpService.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F22DDC1EA86BFB00D2430E /* YelpService.m */; };
 		F5F22DE11EA8729200D2430E /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F22DE01EA8729200D2430E /* Restaurant.m */; };
@@ -122,8 +123,10 @@
 		F548BB1E1EA7E9A3009AE09C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F548BB211EA7EE0E009AE09C /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		F548BB221EA7EE0E009AE09C /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
-		F548BB241EA7EFF1009AE09C /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		F59846C91EA9996900D7ECFA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewRestaurantCell.xib; sourceTree = "<group>"; };
+		F5B7E5CF1EA9D4EB00E45C0E /* ReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewCell.h; sourceTree = "<group>"; };
+		F5B7E5D01EA9D4EB00E45C0E /* ReviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewCell.m; sourceTree = "<group>"; };
 		F5D368171EA94D6C0055C9FD /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		F5D368181EA94D6C0055C9FD /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
 		F5F22DDB1EA86BFB00D2430E /* YelpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YelpService.h; sourceTree = "<group>"; };
@@ -288,7 +291,6 @@
 				F548BB001EA7C0C9009AE09C /* Info.plist */,
 				F51072041EA805F800F30165 /* Config.plist */,
 				F548BAEC1EA7C0C9009AE09C /* Supporting Files */,
-				F548BB241EA7EFF1009AE09C /* data.json */,
 			);
 			path = RestoApp;
 			sourceTree = "<group>";
@@ -350,8 +352,11 @@
 			children = (
 				F548BB0E1EA7C8D7009AE09C /* ListRestaurantCell.xib */,
 				F548BB0C1EA7C8CB009AE09C /* DetailRestaurantCell.xib */,
+				F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */,
 				F547E1631EA8204700147AF5 /* RestaurantCell.h */,
 				F547E1641EA8204700147AF5 /* RestaurantCell.m */,
+				F5B7E5CF1EA9D4EB00E45C0E /* ReviewCell.h */,
+				F5B7E5D01EA9D4EB00E45C0E /* ReviewCell.m */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -496,9 +501,9 @@
 				F51072051EA805F800F30165 /* Config.plist in Resources */,
 				F548BAFF1EA7C0C9009AE09C /* LaunchScreen.storyboard in Resources */,
 				F548BAFC1EA7C0C9009AE09C /* Assets.xcassets in Resources */,
-				F548BB251EA7EFF1009AE09C /* data.json in Resources */,
 				F548BB0F1EA7C8D7009AE09C /* ListRestaurantCell.xib in Resources */,
 				F548BB0D1EA7C8CB009AE09C /* DetailRestaurantCell.xib in Resources */,
+				F5B7E5CE1EA9CA2400E45C0E /* ReviewRestaurantCell.xib in Resources */,
 				F548BB0B1EA7C86B009AE09C /* Message.storyboard in Resources */,
 				F548BAFA1EA7C0C9009AE09C /* Main.storyboard in Resources */,
 				F547E15F1EA8143C00147AF5 /* Restaurant.storyboard in Resources */,
@@ -553,6 +558,7 @@
 				F51071FA1EA8050A00F30165 /* NSDictionary+YLPUtils.m in Sources */,
 				F51071F51EA8050A00F30165 /* YLPClient+Reviews.m in Sources */,
 				F51072011EA8050A00F30165 /* YLPUser.m in Sources */,
+				F5B7E5D11EA9D4EB00E45C0E /* ReviewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

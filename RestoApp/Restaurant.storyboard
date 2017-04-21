@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4HH-pM-MrU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4HH-pM-MrU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -94,14 +94,6 @@
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8nJ-JY-vtD">
                                                                         <rect key="frame" x="315" y="0.0" width="40" height="35"/>
-                                                                        <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7B-dl-302">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="35"/>
-                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="40" id="eQx-ca-KX3"/>
                                                                         </constraints>
@@ -219,18 +211,27 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QOp-Vu-Np4">
+                                        <rect key="frame" x="0.0" y="308" width="375" height="339"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <sections/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="eB2-P9-hVc" firstAttribute="leading" secondItem="crM-W9-VGe" secondAttribute="leading" id="1Xj-EZ-I0E"/>
+                                    <constraint firstAttribute="trailing" secondItem="QOp-Vu-Np4" secondAttribute="trailing" id="2fT-Wl-iuc"/>
                                     <constraint firstItem="KAD-1W-nwz" firstAttribute="top" secondItem="crM-W9-VGe" secondAttribute="top" id="7zO-VG-Oqa"/>
+                                    <constraint firstItem="QOp-Vu-Np4" firstAttribute="top" secondItem="O8G-pN-63m" secondAttribute="bottom" constant="8" id="LPe-HZ-mP6"/>
                                     <constraint firstAttribute="trailing" secondItem="eB2-P9-hVc" secondAttribute="trailing" id="PGG-gP-9VU"/>
                                     <constraint firstAttribute="trailing" secondItem="KAD-1W-nwz" secondAttribute="trailing" id="Y13-Vj-tAb"/>
                                     <constraint firstItem="O8G-pN-63m" firstAttribute="leading" secondItem="crM-W9-VGe" secondAttribute="leading" constant="10" id="ff5-9s-w4Q"/>
+                                    <constraint firstAttribute="bottom" secondItem="QOp-Vu-Np4" secondAttribute="bottom" id="sT9-P4-uwQ"/>
                                     <constraint firstAttribute="trailing" secondItem="O8G-pN-63m" secondAttribute="trailing" constant="10" id="t2m-aZ-EZw"/>
                                     <constraint firstItem="KAD-1W-nwz" firstAttribute="leading" secondItem="crM-W9-VGe" secondAttribute="leading" id="ukQ-VH-Fcv"/>
                                     <constraint firstItem="O8G-pN-63m" firstAttribute="top" secondItem="eB2-P9-hVc" secondAttribute="bottom" constant="10" id="ulC-Bn-Gwi"/>
                                     <constraint firstItem="eB2-P9-hVc" firstAttribute="top" secondItem="KAD-1W-nwz" secondAttribute="bottom" id="zBW-5J-rdX"/>
+                                    <constraint firstItem="QOp-Vu-Np4" firstAttribute="leading" secondItem="crM-W9-VGe" secondAttribute="leading" id="zdR-ho-FfR"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -244,9 +245,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="aL5-aD-azW"/>
                     <connections>
+                        <outlet property="hours" destination="gsC-bT-99V" id="2bi-OZ-wAn"/>
                         <outlet property="mapView" destination="KAD-1W-nwz" id="Bd7-1d-bQ7"/>
                         <outlet property="name" destination="sEg-Rg-b1P" id="BPh-uh-XL2"/>
                         <outlet property="rating" destination="lYt-Wd-S6D" id="v6X-bc-AvC"/>
+                        <outlet property="tableView" destination="QOp-Vu-Np4" id="Pqq-Qo-y6m"/>
+                        <outlet property="totalReviews" destination="Wk8-9e-Ink" id="dNd-ZU-s58"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfu-3r-XlX" userLabel="First Responder" sceneMemberID="firstResponder"/>

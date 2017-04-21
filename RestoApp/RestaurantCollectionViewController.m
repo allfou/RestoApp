@@ -249,7 +249,7 @@ static NSString * const detailCellID = @"detailCell";
         NSArray *myIndexPaths = [self.collectionView indexPathsForSelectedItems];
         NSIndexPath *indexPath = [myIndexPaths objectAtIndex:0];
         DetailViewController *vc = segue.destinationViewController;
-        vc.restaurantId = [[self.restaurants[indexPath.row] business] identifier];        
+        vc.restaurant = self.restaurants[indexPath.row];
     }
 }
 
