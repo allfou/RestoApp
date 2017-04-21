@@ -8,10 +8,6 @@
 //  Yelp API V3 Documentation - https://www.yelp.com/developers/documentation/v3/
 
 #import "YelpService.h"
-#import "YLPClient+Search.h"
-#import "YLPClient+Reviews.h"
-#import "YLPSortType.h"
-#import "YLPSearch.h"
 #import "Restaurant.h"
 #import "AppDelegate.h"
 #import "UIImageView+AFNetworking.h"
@@ -20,7 +16,7 @@
 
 @property (nonatomic) NSMutableArray *restaurants;  // List of restaurants
 @property (nonatomic) YLPSearch *result; // List of businesses
-@property (nonatomic) NSCache *cache;        // Cache (key=restaurant_id, value=list<reviews>)
+@property (nonatomic) NSCache *cache;  // Cache (key=restaurant_id, value=list<reviews>)
 
 @end
 
@@ -45,9 +41,6 @@
         
         // Init List of Near by Restaurants
         self.restaurants = [NSMutableArray new];
-        
-        // Init Location Service
-        // self.locationService = [[LocationService sharedManager]init];
     }
     
     return self;
@@ -61,11 +54,25 @@
      }];
 }
 
-- (void)getReviewsForBusiness:(int)nbReviews withId:(NSString*)businessId {
-    [[AppDelegate sharedYelpClient]reviewsForBusinessWithId:businessId completionHandler:^
-     (YLPBusinessReviews *reviews, NSError *error) {
-         [self.cache setObject:reviews forKey:businessId];
-     }];
+- (void)getReviewsForBusiness:(NSString*)businessId {
+    
+    // Check if reviews for given business are already cached
+    if ([self.cache objectForKey:businessId]) {
+        // Post Review Refresh Notification to Detail View Controller
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshReviewsMessageEvent" object:[self.cache objectForKey:businessId]];
+    }
+    
+    // else download reviews for business
+    else {
+        [[AppDelegate sharedYelpClient]reviewsForBusinessWithId:businessId completionHandler:^
+         (YLPBusinessReviews *reviews, NSError *error) {
+             // Post Review Refresh Notification to Detail View Controller
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshReviewsMessageEvent" object:reviews];
+             
+             // Update cache
+             [self.cache setObject:reviews forKey:businessId];
+         }];
+    }
 }
 
 - (void)refreshRestaurantList {
@@ -86,7 +93,6 @@
 }
 
 - (void)downloadImageFromUrl:(NSURL*)imageUrl forCell:(RestaurantCell*)cell {
-
     NSURLRequest *request = [NSURLRequest requestWithURL:imageUrl];
     UIImage *placeholderImage = [UIImage imageNamed:@"your_placeholder"];
         
@@ -96,6 +102,19 @@
                                        cell.imageView.image = image;
                                        [cell setNeedsLayout];
                                    } failure:nil];
+}
+
+- (void)downloadUserAvatarFromUrl:(NSURL*)imageUrl forCell:(ReviewCell*)cell {
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageUrl];
+    UIImage *placeholderImage = [UIImage imageNamed:@"your_placeholder"];
+
+    [cell.userImage setImageWithURLRequest:request
+                          placeholderImage:placeholderImage
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       cell.userImage.image = image;
+                                       [cell setNeedsLayout];
+                                   } failure:nil];
+
 }
 
 @end

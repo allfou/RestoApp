@@ -140,7 +140,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kCA-T1-Abg">
                                                                         <rect key="frame" x="0.0" y="0.0" width="305" height="45"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours Today: 9:00 - 18:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNg-bg-tM7">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance: 10 miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNg-bg-tM7">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="305" height="45"/>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                                                 <nil key="textColor"/>
@@ -179,7 +179,6 @@
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="KGm-dT-9BR" firstAttribute="leading" secondItem="UH7-hz-Sse" secondAttribute="leading" id="MmA-Fa-bD8"/>
                                                     <constraint firstAttribute="bottom" secondItem="KGm-dT-9BR" secondAttribute="bottom" id="Pho-te-zJ6"/>
@@ -243,7 +242,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="aL5-aD-azW"/>
                     <connections>
-                        <outlet property="hours" destination="XNg-bg-tM7" id="uWY-v4-Ap0"/>
+                        <outlet property="backgroundImage" destination="eB2-P9-hVc" id="ZEQ-OO-CJY"/>
+                        <outlet property="distance" destination="XNg-bg-tM7" id="v6x-Iq-BHi"/>
                         <outlet property="mapView" destination="KAD-1W-nwz" id="sfJ-rH-LKl"/>
                         <outlet property="name" destination="sEg-Rg-b1P" id="8Qb-IP-1vf"/>
                         <outlet property="openOrClose" destination="gsC-bT-99V" id="F9F-ad-P87"/>

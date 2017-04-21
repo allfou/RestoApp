@@ -8,8 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "YLPBusiness.h"
 #import "RestaurantCell.h"
+#import "ReviewCell.h"
+#import "YLPBusiness.h"
+#import "YLPSearch.h"
+#import "YLPReview.h"
+#import "YLPCoordinate.h"
+#import "YLPSortType.h"
+#import "YLPBusinessReviews.h"
+#import "YLPClient+Search.h"
+#import "YLPClient+Reviews.h"
+#import "YLPClient+Business.h"
+#import "YLPResponsePrivate.h"
 
 @interface YelpService : NSObject
 
@@ -17,8 +27,10 @@
 
 - (void)getNearByRestaurantsForLocation:(NSString*)location;
 
-- (void)getReviewsForBusiness:(int)nbReviews withId:(NSString*)businessId;
+- (void)getReviewsForBusiness:(NSString*)businessId;
 
 - (void)downloadImageFromUrl:(NSURL*)imageUrl forCell:(RestaurantCell*)cell;
+
+- (void)downloadUserAvatarFromUrl:(NSURL*)imageUrl forCell:(ReviewCell*)cell;
 
 @end
