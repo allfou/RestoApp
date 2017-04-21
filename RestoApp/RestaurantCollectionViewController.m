@@ -9,22 +9,19 @@
 #import "RestaurantCollectionViewController.h"
 #import "DetailViewController.h"
 #import "RestaurantCell.h"
+#import "LocationService.h"
 #import "YelpService.h"
 #import "YLPClient.h"
 #import "YLPSearch.h"
 #import "Restaurant.h"
 #import "Theme.h"
-#import "LocationService.h"
-
 
 @interface RestaurantCollectionViewController ()
 
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic) NSArray *restaurants;
 @property BOOL currentListViewMode;
 @property BOOL isRefreshing;
-@property (nonatomic, strong) YelpService *yelpService;
-//@property (nonatomic, strong) LocationService *locationService;
 
 @end
 
@@ -38,6 +35,7 @@ static NSString * const detailCellID = @"detailCell";
     
     // Init Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRestaurantList:) name:@"refreshRestaurantListMessageEvent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocationUpdated:) name:@"currentLocationUpdatedMessageEvent" object:nil];
     
     // Init Refresh Control
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -52,8 +50,8 @@ static NSString * const detailCellID = @"detailCell";
     [self setCollectionMode:self.currentListViewMode];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0); // unhide last cell from tabbar
 
-    // Init Yelp Service
-    self.yelpService = [[YelpService sharedManager]init];
+    // Init Location Service
+    [[LocationService sharedManager]startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,12 +66,11 @@ static NSString * const detailCellID = @"detailCell";
     [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
 }
 
-- (void)initData {
-    [[YelpService sharedManager]getNearByRestaurantsForCurrentLocation];
-}
+// ************************************************************************************************************
+
+#pragma mark Notifications
 
 - (void)refreshRestaurantList:(NSNotification*)notification {
-    
     self.restaurants = [notification object];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -81,7 +78,20 @@ static NSString * const detailCellID = @"detailCell";
     });
 }
 
-#pragma mark <UICollectionViewDataSource>
+- (void)currentLocationUpdated:(NSNotification*)notification {
+    NSString *currentLocation = [NSString stringWithFormat:@"%@", [notification object]];
+    
+    // Update List of Restaurant at Location
+    [[YelpService sharedManager] getNearByRestaurantsForLocation:currentLocation];
+}
+
+- (void)initData {
+    [[LocationService sharedManager]startUpdatingLocation];
+}
+
+// ************************************************************************************************************
+
+#pragma mark CollectionView DataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;

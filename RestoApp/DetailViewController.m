@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-#import "LocationService.h"
+//#import "LocationService.h"
 #import "YelpService.h"
 #import "YLPReview.h"
 #import "YLPBusiness.h"

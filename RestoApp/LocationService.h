@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface LocationService : NSObject <CLLocationManagerDelegate>
 
-@property (nonatomic, strong)CLLocationManager* locationManager;
 @property (nonatomic, strong)NSString *location; // Shared current location in NSString format
 
 + (instancetype)sharedManager;
+
+- (void)startUpdatingLocation;
 
 - (NSString*)getCurrentLocation;
 

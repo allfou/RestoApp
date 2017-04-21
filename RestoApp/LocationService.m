@@ -7,22 +7,24 @@
 //
 
 #import "LocationService.h"
-#import "YelpService.h"
 
 @interface LocationService ()
 
-@property (nonatomic, strong) CLLocation *currentLocation; // Private current location of CLLocation type
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation *currentLocation;
 
 @end
 
 @implementation LocationService
 
 + (instancetype)sharedManager {
+    
     static LocationService* sharedManager;
+    
     if(!sharedManager) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            sharedManager = [LocationService new];
+            sharedManager = [[self alloc] init];
         });
     }
     
@@ -36,15 +38,14 @@
         // Init Location Manager
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = kCLDistanceFilterNone;
+        self.locationManager.distanceFilter = 10.0; // Will notify the LocationManager every 10 meters
+        //locationManager.distanceFilter = kCLDistanceFilterNone;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
             [self.locationManager requestWhenInUseAuthorization];
             [self.locationManager requestAlwaysAuthorization];
         }
-        
-        [self.locationManager startUpdatingLocation];
     }
     
     return self;
@@ -63,13 +64,20 @@
             NSLog(@"Current Location Update = %@", self.location);
             
             // Update List of Restaurant at Location
-            [[YelpService sharedManager] getNearByRestaurantsForLocation:self.location];
+            //[[YelpService sharedManager] getNearByRestaurantsForLocation:self.location];
+            
+            // Post Updated Current Location Notification to Restaurant View Controller
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"currentLocationUpdatedMessageEvent" object:self.location];
         }
         else {
             NSLog(@"Geocode failed with error %@", error);
             NSLog(@"\nCurrent Location Not Detected\n");
         }
     }];
+}
+
+- (void)startUpdatingLocation {
+    [self.locationManager startUpdatingLocation];
 }
 
 - (NSString*)getCurrentLocation {

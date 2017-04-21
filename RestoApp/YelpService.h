@@ -15,8 +15,6 @@
 
 + (instancetype)sharedManager;
 
-- (void)getNearByRestaurantsForCurrentLocation;
-
 - (void)getNearByRestaurantsForLocation:(NSString*)location;
 
 - (void)getReviewsForBusiness:(int)nbReviews withId:(NSString*)businessId;

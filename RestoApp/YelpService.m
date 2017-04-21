@@ -15,7 +15,6 @@
 #import "Restaurant.h"
 #import "AppDelegate.h"
 #import "UIImageView+AFNetworking.h"
-#import "LocationService.h"
 
 @interface YelpService ()
 
@@ -23,24 +22,19 @@
 @property (nonatomic) YLPSearch *result; // List of businesses
 @property (nonatomic) NSCache *cache;        // Cache (key=restaurant_id, value=list<reviews>)
 
-@property (nonatomic, strong) CLLocationManager* locationManager;
-@property (nonatomic, strong) CLLocation *currentLocation;
-
-@property (nonatomic, strong) LocationService *locationService;
-
 @end
 
 @implementation YelpService
 
 + (instancetype)sharedManager {
-    static YelpService *sharedYelpService = nil;
+    static YelpService *sharedManager = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedYelpService = [[self alloc]init];
+        sharedManager = [[self alloc]init];
     });
     
-    return sharedYelpService;
+    return sharedManager;
 }
 
 - (instancetype)init {
@@ -53,14 +47,10 @@
         self.restaurants = [NSMutableArray new];
         
         // Init Location Service
-        self.locationService = [[LocationService sharedManager]init];
+        // self.locationService = [[LocationService sharedManager]init];
     }
     
     return self;
-}
-
-- (void)getNearByRestaurantsForCurrentLocation {
-    [self.locationManager startUpdatingLocation];
 }
 
 - (void)getNearByRestaurantsForLocation:(NSString*)location {
@@ -87,6 +77,7 @@
         [self.restaurants addObject:restaurant];
     }
     
+    // Post Refresh Notification to Restaurant View Controller
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshRestaurantListMessageEvent" object:self.restaurants];
 }
 
