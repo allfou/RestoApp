@@ -83,7 +83,7 @@
                             </tableViewSection>
                             <tableViewSection id="neC-5U-InP">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="BBZ-83-4JS" detailTextLabel="vtP-RV-CZT" style="IBUITableViewCellStyleValue1" id="TrF-Ew-D44">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="BBZ-83-4JS" detailTextLabel="vtP-RV-CZT" style="IBUITableViewCellStyleValue1" id="TrF-Ew-D44">
                                         <rect key="frame" x="0.0" y="179.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TrF-Ew-D44" id="Vxh-Sm-7S1">
