@@ -20,6 +20,7 @@
 
 @property (nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic) NSArray *restaurants;
+@property UIImageView *logo;
 @property BOOL currentListViewMode;
 @property BOOL isRefreshing;
 
@@ -36,6 +37,10 @@ static NSString * const detailCellID = @"detailCell";
     // Init Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRestaurantList:) name:@"refreshRestaurantListMessageEvent" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocationUpdated:) name:@"currentLocationUpdatedMessageEvent" object:nil];
+    
+    // Init Navigation Bar (Logo)
+    self.logo = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"nav_logo.png"]];
+    self.tabBarController.navigationItem.titleView = self.logo;
     
     // Init Refresh Control
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -230,8 +235,11 @@ static NSString * const detailCellID = @"detailCell";
         // Get selected cell row index to get the selected restaurant ID
         NSArray *myIndexPaths = [self.collectionView indexPathsForSelectedItems];
         NSIndexPath *indexPath = [myIndexPaths objectAtIndex:0];
+        
+        RestaurantCell *cell = (RestaurantCell*) [self.collectionView cellForItemAtIndexPath:indexPath];
         RestaurantDetailViewController *vc = segue.destinationViewController;
         vc.restaurant = self.restaurants[indexPath.row];
+        vc.restaurant.image = cell.imageView.image;
     }
 }
 

@@ -15,6 +15,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "Theme.h"
 #import "Review.h"
+#import "ActivityViewController.h"
 
 @interface RestaurantDetailViewController ()
 
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalReviews;
 @property (weak, nonatomic) IBOutlet UILabel *openOrClose;
 @property (weak, nonatomic) IBOutlet UIView *backgroundImage;
+@property (strong, nonatomic) UIBarButtonItem *shareButton;
 
 @property NSArray *reviews;
 
@@ -44,6 +46,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    // Init Share Button
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+    self.navigationItem.rightBarButtonItem = self.shareButton;
+    
     // Init Table View
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -188,6 +194,44 @@
         review.review = self.reviews[indexPath.row];
         vc.review = review;
     }
+}
+
+// ****************************************************************************************************************
+
+#pragma mark - Share
+
+- (IBAction)shareClick:(id)sender {
+    [self share];
+}
+
+- (void)share {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSString *shareText = [NSString stringWithFormat:@"Should we book a table at %@ - %@ food, %.1f stars?",
+                               self.restaurant.business.name,
+                               [[self.restaurant.business.categories firstObject] name],
+                               self.restaurant.business.rating];
+        
+        NSArray *objectsToShare = @[shareText, self.restaurant.image];
+        
+        ActivityViewController *activityVC = [[ActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+        
+        [activityVC setValue:@"Seen on Gentlemen's Wheel" forKey:@"subject"];
+        
+        NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                       UIActivityTypePrint,
+                                       UIActivityTypeMail,
+                                       UIActivityTypePostToTwitter,
+                                       UIActivityTypeAssignToContact,
+                                       UIActivityTypeSaveToCameraRoll,
+                                       UIActivityTypeAddToReadingList,
+                                       UIActivityTypePostToFlickr,
+                                       UIActivityTypePostToVimeo];
+        
+        activityVC.excludedActivityTypes = excludeActivities;
+        
+        [self presentViewController:activityVC animated:YES completion:nil];
+    });
 }
 
 @end

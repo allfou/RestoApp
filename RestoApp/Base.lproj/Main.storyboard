@@ -21,18 +21,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="S41-s9-CX8">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="2A6-vi-U9K">
+                                <rect key="frame" x="112" y="258" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="0D7-XS-1G9"/>
+                                    <constraint firstAttribute="width" constant="150" id="Pt4-Ll-RHM"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.10428311699999999" green="0.20044176750000001" blue="0.29612151019999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="S41-s9-CX8" firstAttribute="centerY" secondItem="IXP-LP-Dk4" secondAttribute="centerY" id="EUP-C0-4go"/>
-                            <constraint firstItem="S41-s9-CX8" firstAttribute="centerX" secondItem="IXP-LP-Dk4" secondAttribute="centerX" id="izl-ed-iaS"/>
+                            <constraint firstItem="2A6-vi-U9K" firstAttribute="centerX" secondItem="IXP-LP-Dk4" secondAttribute="centerX" id="Gak-Zu-m9K"/>
+                            <constraint firstItem="2A6-vi-U9K" firstAttribute="centerY" secondItem="IXP-LP-Dk4" secondAttribute="centerY" id="UnA-YL-hjQ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="S41-s9-CX8" id="hiS-gn-kXS"/>
                         <segue destination="vff-A6-kKN" kind="presentation" identifier="homeSegue" modalTransitionStyle="crossDissolve" id="RKi-z6-dE2"/>
                     </connections>
                 </viewController>
@@ -68,6 +71,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.10428311699999999" green="0.20044176750000001" blue="0.29612151019999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="0.72925920050000004" green="0.088279800879999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="obl-Bh-R2t" kind="relationship" relationship="viewControllers" id="2CM-YR-Ton"/>
@@ -78,10 +82,10 @@
             </objects>
             <point key="canvasLocation" x="-39" y="106"/>
         </scene>
-        <!--Message-->
+        <!--Settings-->
         <scene sceneID="vEF-Zs-TVh">
             <objects>
-                <viewControllerPlaceholder storyboardName="Message" id="Vz0-Pk-h1r" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Settings" id="Vz0-Pk-h1r" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="oa8-4L-Q5Y"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJm-i5-Zbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,4 +103,7 @@
             <point key="canvasLocation" x="-260" y="552"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="624" height="640"/>
+    </resources>
 </document>

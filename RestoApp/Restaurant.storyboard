@@ -13,7 +13,7 @@
         <scene sceneID="MKu-uk-EtJ">
             <objects>
                 <collectionViewController id="4HH-pM-MrU" customClass="RestaurantCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="l4S-s4-nfk">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="l4S-s4-nfk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93132735206391004" green="0.93132735206391004" blue="0.93132735206391004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -30,13 +30,8 @@
                             <outlet property="delegate" destination="4HH-pM-MrU" id="Mha-G8-baf"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Near by" id="Fzz-17-8oQ">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.10428311699999999" green="0.20044176750000001" blue="0.29612151019999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Near by" image="location" id="NXu-vs-lxl"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="w2g-lg-xur" kind="show" identifier="detailSegue" id="MTE-7k-dNM">
                             <nil key="action"/>
@@ -44,7 +39,6 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zql-em-LmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarItem title="Near by" id="NXu-vs-lxl"/>
             </objects>
             <point key="canvasLocation" x="718" y="106"/>
         </scene>
@@ -61,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crM-W9-VGe" userLabel="Container View">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KAD-1W-nwz">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
@@ -208,9 +202,12 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="shareClick:" destination="w2g-lg-xur" eventType="touchUpInside" id="1jA-90-gxJ"/>
+                                        </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QOp-Vu-Np4">
-                                        <rect key="frame" x="0.0" y="298" width="375" height="349"/>
+                                        <rect key="frame" x="0.0" y="298" width="375" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <sections/>
                                     </tableView>
@@ -270,7 +267,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ld1-BP-qO7">
-                                <rect key="frame" x="10" y="30" width="355" height="627"/>
+                                <rect key="frame" x="10" y="30" width="355" height="578"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="oEK-f0-AuS">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
@@ -354,10 +351,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ1-m9-LEv" userLabel="Review Stack View">
-                                        <rect key="frame" x="0.0" y="40" width="355" height="587"/>
+                                        <rect key="frame" x="0.0" y="40" width="355" height="538"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbJ-RE-11C">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="587"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="538"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -397,4 +394,7 @@
             <point key="canvasLocation" x="2252" y="106"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="location" width="25" height="25"/>
+    </resources>
 </document>
