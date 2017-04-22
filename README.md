@@ -1,8 +1,8 @@
 # RestoApp
 
-<strong>A simple Messaging app that helps you decide where to grab lunch/dinner with your friends at a near by restaurant.</strong>
+A simple Messaging app that helps you decide where to grab lunch/dinner with your friends at a near by restaurant.
 
-<p align="center"><img width="100" height="100" src="Images/logo.png?raw=true"></p>
+<p align="center"><img width="50" height="50" src="Images/logo.png?raw=true"></p>
 
 * Based on <a href="https://github.com/Yelp/yelp-ios">Yelp API V3 iOS</a>
 
