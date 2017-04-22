@@ -1,10 +1,10 @@
 # restoapp
 
-A simple Messaging app that helps you decide where to grab luch or dinner with your friends at a near by restaurant.
+A simple Messaging app that helps you decide where to grab lunch/dinner with your friends at a near by restaurant.
 
-Based on <a href="https://github.com/Yelp/yelp-ios">Yelp API V3 iOS</a>
+* Based on <a href="https://github.com/Yelp/yelp-ios">Yelp API V3 iOS</a>
 
-Update Yelp credentials with your own credentials in <strong>Config.plist</strong>:
+* Update Yelp credentials with your own credentials in <strong>Config.plist</strong>:
 
 ```python
 	<key>yelp_client_id</key>
