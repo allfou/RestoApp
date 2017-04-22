@@ -16,7 +16,7 @@
 
 @property (nonatomic) NSMutableArray *restaurants;  // List of restaurants
 @property (nonatomic) YLPSearch *result; // List of businesses
-@property (nonatomic) NSCache *cache;  // Cache (key=restaurant_id, value=list<reviews>)
+@property (nonatomic) NSCache *cache;  // Cache for Reviews (key=restaurant_id, value=list<reviews>)
 
 @end
 
@@ -64,7 +64,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshReviewsMessageEvent" object:[self.cache objectForKey:businessId]];
     }
     
-    // else download reviews for business
+    // Else download reviews for business
     else {
         [[AppDelegate sharedYelpClient]reviewsForBusinessWithId:businessId completionHandler:^
          (YLPBusinessReviews *reviews, NSError *error) {
@@ -113,9 +113,7 @@
                                                cell.imageView.alpha = 1.0f;
                                                [cell setNeedsLayout];
                                            }];
-                                       });
-                                       
-                                       
+                                       });                                       
                                    } failure:nil];
 }
 

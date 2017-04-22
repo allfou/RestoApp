@@ -18,9 +18,7 @@
 @implementation LocationService
 
 + (instancetype)sharedManager {
-    
     static LocationService* sharedManager;
-    
     if(!sharedManager) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
@@ -39,12 +37,10 @@
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         self.locationManager.distanceFilter = 10.0; // Will notify the LocationManager every 10 meters
-        //locationManager.distanceFilter = kCLDistanceFilterNone;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
             [self.locationManager requestWhenInUseAuthorization];
-            //[self.locationManager requestAlwaysAuthorization];
         }
     }
     

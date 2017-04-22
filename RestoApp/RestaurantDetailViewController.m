@@ -136,7 +136,7 @@
 - (void)getRestaurantHours {
     [[AppDelegate sharedYelpClient] businessWithId:self.restaurant.business.identifier completionHandler:^
      (YLPBusiness *search, NSError *error) {
-         // TODO: Yelp API V3 doesn't provide hours data for iOS yet
+         // TODO: Looks like Yelp API V3 doesn't provide restaurant hours for iOS yet...
      }];
 }
 
