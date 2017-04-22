@@ -1,5 +1,4 @@
 <p align="center"><img width="50" height="50" src="Images/logo.png?raw=true"></p>
-
 # RestoApp
 
 A simple Messaging app that helps you decide where to grab lunch/dinner with your friends at a near by restaurant.
