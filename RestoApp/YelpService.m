@@ -46,8 +46,10 @@
     return self;
 }
 
-- (void)getNearByRestaurantsForLocation:(NSString*)location {
-    [[AppDelegate sharedYelpClient] searchWithLocation:location term:@"Restaurant" limit:50 offset:0 sort:YLPSortTypeDistance completionHandler:^
+- (void)getNearByRestaurantsForLocation:(NSString*)location withFood:(NSString*)food sortedBy:(NSString*)sortedBy {
+    NSString *terms = [NSString stringWithFormat:@"Restaurant %@", food];
+    
+    [[AppDelegate sharedYelpClient] searchWithLocation:location term:terms limit:50 offset:0 sort:[self getSortedType:sortedBy] completionHandler:^
      (YLPSearch *search, NSError* error) {
          self.result = search;
          [self refreshRestaurantList];
@@ -101,8 +103,19 @@
     [cell.imageView setImageWithURLRequest:request
                           placeholderImage:placeholderImage
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                       cell.imageView.image = image;
-                                       [cell setNeedsLayout];
+                                       //cell.imageView.image = image;
+                                       //[cell setNeedsLayout];
+                                       
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           cell.imageView.alpha = 0.0f;
+                                           cell.imageView.image = image;
+                                           [UIView animateWithDuration:0.5f animations:^{
+                                               cell.imageView.alpha = 1.0f;
+                                               [cell setNeedsLayout];
+                                           }];
+                                       });
+                                       
+                                       
                                    } failure:nil];
 }
 
@@ -117,6 +130,21 @@
                                        [cell setNeedsLayout];
                                    } failure:nil];
 
+}
+
+- (YLPSortType)getSortedType:(NSString*)type {
+    // Switch case on NSString
+    __block YLPSortType sortedType;
+    typedef void (^CaseBlock)();
+    NSDictionary *d = @{
+                        @"Best Match":     ^{ sortedType = YLPSortTypeBestMatched; },
+                        @"Distance":       ^{ sortedType = YLPSortTypeDistance; },
+                        @"Highest Rated":  ^{ sortedType = YLPSortTypeHighestRated; },
+                        @"Most Reviewed":  ^{ sortedType = YLPSortTypeMostReviewed; }
+                        };
+    ((CaseBlock)d[type])();
+    
+    return sortedType;
 }
 
 @end

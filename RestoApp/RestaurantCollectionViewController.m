@@ -16,6 +16,12 @@
 #import "Restaurant.h"
 #import "Theme.h"
 
+@interface UIViewController (PRScrollToTop)
+
+- (void)scrollToTop;
+
+@end
+
 @interface RestaurantCollectionViewController ()
 
 @property (nonatomic) UIRefreshControl *refreshControl;
@@ -37,6 +43,10 @@ static NSString * const detailCellID = @"detailCell";
     // Init Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRestaurantList:) name:@"refreshRestaurantListMessageEvent" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocationUpdated:) name:@"currentLocationUpdatedMessageEvent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initData) name:@"reloadRestaurantListMessageEvent" object:nil];
+    
+    // Used for double tap on tabbar items
+    self.tabBarController.delegate = self;
     
     // Init Navigation Bar (Logo)
     self.logo = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"nav_logo.png"]];
@@ -85,9 +95,11 @@ static NSString * const detailCellID = @"detailCell";
 
 - (void)currentLocationUpdated:(NSNotification*)notification {
     NSString *currentLocation = [NSString stringWithFormat:@"%@", [notification object]];
+    NSString *food = [[NSUserDefaults standardUserDefaults] stringForKey:@"foodType"];
+    NSString *sortedBy = [[NSUserDefaults standardUserDefaults] stringForKey:@"sortedBy"];
     
     // Update List of Restaurant at Location
-    [[YelpService sharedManager] getNearByRestaurantsForLocation:currentLocation];
+    [[YelpService sharedManager] getNearByRestaurantsForLocation:currentLocation withFood:food sortedBy:sortedBy];
 }
 
 - (void)initData {
@@ -124,8 +136,10 @@ static NSString * const detailCellID = @"detailCell";
     [cell updateCellWithBusiness:self.restaurants[indexPath.row]];
     
     // Set Restaurant Image
-    __weak RestaurantCell *weakCell = cell;
-    [[YelpService sharedManager]downloadImageFromUrl:[self.restaurants[indexPath.row] business].imageURL forCell:weakCell];
+    if ([self.restaurants count] > 0) {
+        __weak RestaurantCell *weakCell = cell;
+        [[YelpService sharedManager]downloadImageFromUrl:[self.restaurants[indexPath.row] business].imageURL forCell:weakCell];
+    }
     
     return cell;
 }
@@ -241,6 +255,39 @@ static NSString * const detailCellID = @"detailCell";
         vc.restaurant = self.restaurants[indexPath.row];
         vc.restaurant.image = cell.imageView.image;
     }
+}
+
+
+//***************************************************************************************************************************************
+
+#pragma mark - Tab bar Delegate
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    static UIViewController *previousController;
+    previousController = previousController ?: viewController;
+    if (previousController == viewController) {
+        if ([viewController isKindOfClass:UINavigationController.class]) {
+            UINavigationController *navigationController = (UINavigationController *)viewController;
+            if (navigationController.viewControllers.count == 1) {
+                UIViewController *rootViewController = navigationController.viewControllers.firstObject;
+                if ([rootViewController respondsToSelector:@selector(scrollToTop)]) {
+                    [rootViewController scrollToTop];
+                }
+            }
+        } else {
+            if ([viewController respondsToSelector:@selector(scrollToTop)]) {
+                [viewController scrollToTop];
+            }
+        }
+    }
+    previousController = viewController;
+    return YES;
+}
+
+-(void)scrollToTop {
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                atScrollPosition:UICollectionViewScrollPositionTop
+                                        animated:YES];
 }
 
 @end

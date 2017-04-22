@@ -61,7 +61,7 @@
             // Get Current Location
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             self.location = [NSString stringWithFormat:@"%@, %@", placemark.locality, placemark.administrativeArea];
-            NSLog(@"Current Location Update = %@", self.location);
+            //NSLog(@"Current Location Update = %@", self.location);
             
             // Post Updated Current Location Notification to Restaurant View Controller
             [[NSNotificationCenter defaultCenter] postNotificationName:@"currentLocationUpdatedMessageEvent" object:self.location];

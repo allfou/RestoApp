@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RestaurantCollectionViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout>
+@interface RestaurantCollectionViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout, UITabBarControllerDelegate>
 
 @end

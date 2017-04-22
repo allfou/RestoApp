@@ -25,7 +25,7 @@
 
 + (instancetype)sharedManager;
 
-- (void)getNearByRestaurantsForLocation:(NSString*)location;
+- (void)getNearByRestaurantsForLocation:(NSString*)location withFood:(NSString*)food sortedBy:(NSString*)sortedBy;
 
 - (void)getReviewsForBusiness:(NSString*)businessId;
 

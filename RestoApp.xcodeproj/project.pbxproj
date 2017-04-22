@@ -42,6 +42,9 @@
 		F5B526371EAAB7F80039D998 /* ReviewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B526361EAAB7F80039D998 /* ReviewDetailViewController.m */; };
 		F5B5263A1EAAB8ED0039D998 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B526391EAAB8ED0039D998 /* Review.m */; };
 		F5B527041EAAEA6F0039D998 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B527031EAAEA6F0039D998 /* ActivityViewController.m */; };
+		F5B527071EAB07FB0039D998 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B527061EAB07FB0039D998 /* SettingsViewController.m */; };
+		F5B5270A1EAB0AD60039D998 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B527091EAB0AD60039D998 /* FoodViewController.m */; };
+		F5B5270D1EAB138E0039D998 /* SortedByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5270C1EAB138E0039D998 /* SortedByViewController.m */; };
 		F5B7E5CE1EA9CA2400E45C0E /* ReviewRestaurantCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */; };
 		F5B7E5D11EA9D4EB00E45C0E /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B7E5D01EA9D4EB00E45C0E /* ReviewCell.m */; };
 		F5D368191EA94D6C0055C9FD /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D368181EA94D6C0055C9FD /* LocationService.m */; };
@@ -131,6 +134,12 @@
 		F5B526661EAACA720039D998 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		F5B527021EAAEA6F0039D998 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		F5B527031EAAEA6F0039D998 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		F5B527051EAB07FB0039D998 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		F5B527061EAB07FB0039D998 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		F5B527081EAB0AD60039D998 /* FoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodViewController.h; sourceTree = "<group>"; };
+		F5B527091EAB0AD60039D998 /* FoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodViewController.m; sourceTree = "<group>"; };
+		F5B5270B1EAB138E0039D998 /* SortedByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedByViewController.h; sourceTree = "<group>"; };
+		F5B5270C1EAB138E0039D998 /* SortedByViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortedByViewController.m; sourceTree = "<group>"; };
 		F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewRestaurantCell.xib; sourceTree = "<group>"; };
 		F5B7E5CF1EA9D4EB00E45C0E /* ReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewCell.h; sourceTree = "<group>"; };
 		F5B7E5D01EA9D4EB00E45C0E /* ReviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewCell.m; sourceTree = "<group>"; };
@@ -313,6 +322,12 @@
 		F548BB061EA7C0ED009AE09C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F5B527051EAB07FB0039D998 /* SettingsViewController.h */,
+				F5B527061EAB07FB0039D998 /* SettingsViewController.m */,
+				F5B527081EAB0AD60039D998 /* FoodViewController.h */,
+				F5B527091EAB0AD60039D998 /* FoodViewController.m */,
+				F5B5270B1EAB138E0039D998 /* SortedByViewController.h */,
+				F5B5270C1EAB138E0039D998 /* SortedByViewController.m */,
 				F5B527021EAAEA6F0039D998 /* ActivityViewController.h */,
 				F5B527031EAAEA6F0039D998 /* ActivityViewController.m */,
 				F548BB0A1EA7C86B009AE09C /* Settings.storyboard */,
@@ -537,10 +552,13 @@
 				F51071F61EA8050A00F30165 /* YLPClient+Search.m in Sources */,
 				F5F22E0B1EA8799A00D2430E /* AFURLResponseSerialization.m in Sources */,
 				F51071FD1EA8050A00F30165 /* YLPCategory.m in Sources */,
+				F5B5270D1EAB138E0039D998 /* SortedByViewController.m in Sources */,
+				F5B5270A1EAB0AD60039D998 /* FoodViewController.m in Sources */,
 				F5B527041EAAEA6F0039D998 /* ActivityViewController.m in Sources */,
 				F5F22E0D1EA8799A00D2430E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				F51071F41EA8050A00F30165 /* YLPClient+PhoneSearch.m in Sources */,
 				F51071F81EA8050A00F30165 /* YLPCoordinate.m in Sources */,
+				F5B527071EAB07FB0039D998 /* SettingsViewController.m in Sources */,
 				F51071FC1EA8050A00F30165 /* YLPBusinessReviews.m in Sources */,
 				F5F22E121EA8799A00D2430E /* UIWebView+AFNetworking.m in Sources */,
 				F51071FF1EA8050A00F30165 /* YLPReview.m in Sources */,

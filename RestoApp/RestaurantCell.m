@@ -18,6 +18,7 @@
     [super prepareForReuse];
     
     // Reset values for reusable cell
+    self.imageView.image = nil;
     self.name.text = @"";
     self.type.text = @"";
     self.reviews.text = @"";
