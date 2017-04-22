@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) YLPLocation *location;
 
+// Added distance to YLPBusiness Object
+@property (nonatomic, readonly) double distance;
+@property (nonatomic, readonly) NSString *price;
+
 @end
 
 NS_ASSUME_NONNULL_END

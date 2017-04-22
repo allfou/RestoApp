@@ -13,7 +13,7 @@
         <scene sceneID="MKu-uk-EtJ">
             <objects>
                 <collectionViewController id="4HH-pM-MrU" customClass="RestaurantCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="l4S-s4-nfk">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="l4S-s4-nfk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93132735206391004" green="0.93132735206391004" blue="0.93132735206391004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

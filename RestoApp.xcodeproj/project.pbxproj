@@ -374,13 +374,13 @@
 		F548BB201EA7E9B5009AE09C /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				F548BB0E1EA7C8D7009AE09C /* ListRestaurantCell.xib */,
-				F548BB0C1EA7C8CB009AE09C /* DetailRestaurantCell.xib */,
-				F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */,
 				F547E1631EA8204700147AF5 /* RestaurantCell.h */,
 				F547E1641EA8204700147AF5 /* RestaurantCell.m */,
 				F5B7E5CF1EA9D4EB00E45C0E /* ReviewCell.h */,
 				F5B7E5D01EA9D4EB00E45C0E /* ReviewCell.m */,
+				F548BB0E1EA7C8D7009AE09C /* ListRestaurantCell.xib */,
+				F548BB0C1EA7C8CB009AE09C /* DetailRestaurantCell.xib */,
+				F5B7E5CD1EA9CA2400E45C0E /* ReviewRestaurantCell.xib */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";

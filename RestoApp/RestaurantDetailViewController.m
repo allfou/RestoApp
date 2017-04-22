@@ -77,6 +77,7 @@
     self.rating.shouldBeginGestureRecognizerBlock = nil;
     [self.rating setShouldBecomeFirstResponder:NO];
     [self.rating setUserInteractionEnabled:NO];
+    [self.distance setText:[NSString stringWithFormat:@"Distance: %.1f mi", [self convertMetersToMiles:self.restaurant.business.distance]]];
     
     // Init Data
     [self initData];
@@ -232,6 +233,13 @@
         
         [self presentViewController:activityVC animated:YES completion:nil];
     });
+}
+
+// ****************************************************************************************************************
+
+- (double)convertMetersToMiles:(double)meters {
+    
+    return meters * 0.000621371192;
 }
 
 @end
