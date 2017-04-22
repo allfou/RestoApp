@@ -4,14 +4,14 @@ A simple Messaging app that helps you decide where to grab luch or dinner with y
 
 Based on <a href="https://github.com/Yelp/yelp-ios">Yelp API V3 iOS</a>
 
-Update Yelp credentials with your own credentials:
+Update Yelp credentials with your own credentials in <strong>Config.plist</strong>:
 
-<code>
+```python
 	<key>yelp_client_id</key>
-	<string>XWiMVjMxo1FdTa5sNIKEBw</string>
+	<string>YOUR_CLIENT_ID</string>
 	<key>yelp_client_secret</key>
-	<string>NVTuA0kqDvPDs24dXBFYfaOGCzPzvRjWNvMUx3Xziw5o1bGIjiM0LSwJ8nWViols</string>
-</code>
+	<string>YOUR_CLIENT_SECRET</string>
+```
 
 <h4>List of near by restaurants:</h4>
 <p align="center"><img width="338" height="600" src="Images/RestoApp_1.PNG?raw=true"></p><br><br>
