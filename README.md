@@ -1,4 +1,4 @@
-# restoapp
+# RestoApp
 
 A simple Messaging app that helps you decide where to grab lunch/dinner with your friends at a near by restaurant.
 
