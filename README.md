@@ -4,7 +4,7 @@ A simple Messaging app that helps you decide where to grab lunch/dinner with you
 
 * Based on <a href="https://github.com/Yelp/yelp-ios">Yelp API V3 iOS</a>
 
-* Update Yelp credentials with your own credentials in <strong>Config.plist</strong>:
+* Update your Yelp credentials in <strong>Config.plist</strong>:
 
 ```python
 	<key>yelp_client_id</key>
