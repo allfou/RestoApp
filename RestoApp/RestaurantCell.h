@@ -13,6 +13,7 @@
 
 @interface RestaurantCell : UICollectionViewCell
 
+// List View Attributes
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *stars;
@@ -20,6 +21,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *type;
 @property (weak, nonatomic) IBOutlet UILabel *hours;
 
-- (void)updateCellWithBusiness:(Restaurant*)restaurant;
+// Detail View Attributes
+@property (weak, nonatomic) IBOutlet UILabel *distance;
+@property (weak, nonatomic) IBOutlet UILabel *price;
+@property (weak, nonatomic) IBOutlet UILabel *address;
+@property (weak, nonatomic) IBOutlet UILabel *city;
+@property (weak, nonatomic) IBOutlet UILabel *zip;
+
+- (void)updateCellWithBusiness:(Restaurant*)restaurant withViewMode:(BOOL)isDetailMode;
 
 @end

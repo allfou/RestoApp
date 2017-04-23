@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YLPBusiness.h"
+#import "YLPLocation.h"
 
 @interface Restaurant : NSObject
 

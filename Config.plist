@@ -6,8 +6,6 @@
 	<string>Distance</string>
 	<key>foodType</key>
 	<string>All</string>
-	<key>listViewMode</key>
-	<true/>
 	<key>yelp_client_id</key>
 	<string>XWiMVjMxo1FdTa5sNIKEBw</string>
 	<key>yelp_client_secret</key>

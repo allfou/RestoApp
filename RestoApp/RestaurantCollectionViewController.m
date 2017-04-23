@@ -25,9 +25,10 @@
 @interface RestaurantCollectionViewController ()
 
 @property (nonatomic) UIRefreshControl *refreshControl;
+@property UIBarButtonItem *switchViewModeButton;
 @property (nonatomic) NSArray *restaurants;
 @property UIImageView *logo;
-@property BOOL currentListViewMode;
+@property BOOL isDetailMode;
 @property BOOL isRefreshing;
 
 @end
@@ -49,7 +50,11 @@ static NSString * const detailCellID = @"detailCell";
     self.tabBarController.delegate = self;
     
     // Init Navigation Bar (Logo)
-    self.logo = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"nav_logo.png"]];
+    self.logo = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"nav_logo.png"]];
+    [self.logo setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchViewMode)];
+    [singleTap setNumberOfTapsRequired:1];
+    [self.logo addGestureRecognizer:singleTap];
     self.tabBarController.navigationItem.titleView = self.logo;
     
     // Init Refresh Control
@@ -61,8 +66,8 @@ static NSString * const detailCellID = @"detailCell";
     self.isRefreshing = NO;
     
     // Init CollectionView
-    self.currentListViewMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"listViewMode"];
-    [self setCollectionMode:self.currentListViewMode];
+    self.isDetailMode = NO; // Set List Mode by default
+    [self setCollectionMode];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0); // unhide last cell from tabbar
 
     // Init Location Service
@@ -122,10 +127,10 @@ static NSString * const detailCellID = @"detailCell";
     
     RestaurantCell *cell;
     
-    if (self.currentListViewMode) {
-        cell = (RestaurantCell*) [collectionView dequeueReusableCellWithReuseIdentifier:listCellID forIndexPath:indexPath];
-    } else {
+    if (self.isDetailMode) {
         cell = (RestaurantCell*) [collectionView dequeueReusableCellWithReuseIdentifier:detailCellID forIndexPath:indexPath];
+    } else {
+        cell = (RestaurantCell*) [collectionView dequeueReusableCellWithReuseIdentifier:listCellID forIndexPath:indexPath];
     }
     
     if (!cell) {
@@ -133,7 +138,7 @@ static NSString * const detailCellID = @"detailCell";
     }
     
     // Set Restaurant Info
-    [cell updateCellWithBusiness:self.restaurants[indexPath.row]];
+    [cell updateCellWithBusiness:self.restaurants[indexPath.row] withViewMode:self.isDetailMode];
     
     // Set Restaurant Image
     if ([self.restaurants count] > 0) {
@@ -152,14 +157,29 @@ static NSString * const detailCellID = @"detailCell";
     [self performSegueWithIdentifier:@"detailSegue" sender:self];
 }
 
-- (void)setCollectionMode:(BOOL)animated {
+// ************************************************************************************************************
+
+#pragma mark Restaurant View Mode
+
+- (void)switchViewMode {
+    if (self.isDetailMode) {
+        self.isDetailMode = NO;
+        [self setNavigationLogoImage:@"nav_logo.png"];
+    } else {
+        self.isDetailMode = YES;
+        [self setNavigationLogoImage:@"nav_logo_open.png"];
+    }
+    
+    [self setCollectionMode];
+}
+
+- (void)setCollectionMode {
     UINib *restaurantCellNib;
     
-    if (self.currentListViewMode) {
+    if (!self.isDetailMode) {
         restaurantCellNib = [UINib nibWithNibName:@"ListRestaurantCell" bundle:nil];
         [self.collectionView registerNib:restaurantCellNib forCellWithReuseIdentifier:listCellID];
-        
-        if (animated) [self.collectionView reloadData];
+        [self.collectionView reloadData];
         
         __block UICollectionViewFlowLayout *flowLayout;
         
@@ -174,15 +194,14 @@ static NSString * const detailCellID = @"detailCell";
             flowLayout.minimumLineSpacing = 10.0f;
             flowLayout.minimumInteritemSpacing = 0.0f;
             flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            [self.collectionView setCollectionViewLayout:flowLayout animated:NO];
+            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
         } completion:^(BOOL finished) {
             
         }];
     } else {
-        restaurantCellNib = [UINib nibWithNibName:@"DetaiRestaurantCell" bundle:nil];
+        restaurantCellNib = [UINib nibWithNibName:@"DetailRestaurantCell" bundle:nil];
         [self.collectionView registerNib:restaurantCellNib forCellWithReuseIdentifier:detailCellID];
-        
-        if (animated) [self.collectionView reloadData];
+        [self.collectionView reloadData];
         
         __block UICollectionViewFlowLayout *flowLayout;
         [self.collectionView performBatchUpdates:^{
@@ -190,17 +209,23 @@ static NSString * const detailCellID = @"detailCell";
             CGSize mElementSize;
             [self.collectionView.collectionViewLayout invalidateLayout];
             width = self.collectionView.frame.size.width / 1;
-            mElementSize = CGSizeMake(width, 297);
+            mElementSize = CGSizeMake(width, 270);
             flowLayout = [[UICollectionViewFlowLayout alloc] init];
             [flowLayout setItemSize:mElementSize];
             flowLayout.minimumLineSpacing = 0.0f;
             flowLayout.minimumInteritemSpacing = 0.0f;
             flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            [self.collectionView setCollectionViewLayout:flowLayout animated:NO];
+            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
         } completion:^(BOOL finished) {
             
         }];
     }
+}
+
+- (void)setNavigationLogoImage:(NSString*)imageName {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.logo.image = [UIImage imageNamed:imageName];
+    });
 }
 
 //*****************************************************************************************************************************************
